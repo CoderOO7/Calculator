@@ -1,52 +1,71 @@
-*{
-    margin: 0;
-    padding: 0;
+*,*:before,*:after {
     box-sizing: border-box;
 }
 
 body{
-    font-weight: 300;
-    font-family: Arial, Helvetica, sans-serif;
+    font: italic small-caps 300 13px/150% Arial, Helvetica, sans-serif;
 }
 
 main{
-    width: 30vw;
+    font-size: 1rem;
     margin: 0 auto;
     text-align: center;
 }
 
 main header{
-    padding: 2rem;
-    font-size: 2em;
+    padding: 0.8em;
+    font-size: 3em;
     font-weight: 800;
 }
 
 #calc-container{
     display: grid;
+    width: 50vh;
     height: 60vh;
-    border: 2px solid brown;
+    padding: 0.6em;
+    margin: 0 auto;
+    border: 0.2em solid black;
+    border-radius: 3%;
+    background-color: #2f2f2f;
+    box-shadow: 5px 4px 17px 0px rgba(50, 50, 50, 0.64);
 }
 
 #display-container{
-    padding: 0.2em;
-    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 0.6em;
+    border-radius: 0.4rem; 
+    background-color: white;
 }
-
-#display-container{
-
+#medium{
+    height: 50%;
+}
+#small{
+    height: 40%;
+}
+#medium,#small{
+    /* background-color: white;
+    border: 2px solid chocolate; */
 }
 
 #button-container{
     display: grid;
-    font-size: 3em;
     grid-template-rows: repeat(5,1fr);
     grid-template-columns: repeat(4,1fr);
-    /* grid-gap: 18px; */
+    grid-gap: 2px;
 }
-
-#button-container button{
-    /* height: 4rem;
-    width: 4rem; */
+button{
+    outline: none;
+    font-size: 1.2em;
+    font-weight: 800;
+    border-radius: 0.4rem;
+    background-color: white;
+}
+button:active{
+    font-size: 1.4em;
+    box-shadow:inset 0 0 10px rgb(0,0,0,0.8);    
+    /* margin: 2px; */
 } 
 
 #bksp img{
