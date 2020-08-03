@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- stylesheet -->
     <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/main.css">
     <title>Document</title>
 </head>
 <body>
@@ -19,9 +19,9 @@
                 <div class="display" id="small"></div>
             </div>
             <div id="button-container">
-                <button class="operator" data-op="reset">C</button>
+                <button class="misc__btn" data-op="reset">AC</button>
                 <button class="operator" data-op="percentage">%</button>
-                <button class="operator" data-op="backspace" id="bksp">
+                <button class="misc__btn" data-op="backspace" id="bksp">
                     <img src="assets/images/backspace.png" alt="backspace">
                 </button>
                 <button class="operator" data-op="divide">÷</button>
@@ -40,13 +40,14 @@
                 <button class="number">0</button>
                 <button class="number">00</button>
                 <button class="operator" data-op="decimal">.</button>
-                <button class="operator" data-op="result">=</button>
+                <button class="misc__btn" data-op="result">=</button>
             </div>
         </div>
-        <footer>
-
-        </footer>
     </main>
+
+    <footer id="footer">
+        <small id="footer_copyright">Copyright &copy;2020; Made by CoderOO7</small> 
+    </footer>
 
     <script src="./scripts/main.js"></script>
 </body>

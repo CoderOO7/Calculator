@@ -3,16 +3,18 @@
 }
 
 body{
-    font: italic small-caps 300 13px/150% Arial, Helvetica, sans-serif;
+    text-align: center;
+    font: 300 13px/150% Arial, Helvetica, sans-serif;
 }
 
 main{
+    height: 90vh;
     font-size: 1rem;
     margin: 0 auto;
-    text-align: center;
 }
 
 main header{
+    height: 18vh;
     padding: 0.8em;
     font-size: 3em;
     font-weight: 800;
@@ -32,21 +34,27 @@ main header{
 
 #display-container{
     display: flex;
+    flex:1;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: stretch;
     margin-bottom: 0.6em;
     border-radius: 0.4rem; 
     background-color: white;
 }
 #medium{
+    flex: 1;
+    font-size: 2em;
     height: 50%;
 }
 #small{
+    font-size: 1.5em;
     height: 40%;
 }
 #medium,#small{
-    /* background-color: white;
-    border: 2px solid chocolate; */
+    padding: 0.1em;
+    line-height: 0.9em;
+    background-color: white;
+    /* border: 2px solid chocolate;  */
 }
 
 #button-container{
@@ -71,4 +79,12 @@ button:active{
 #bksp img{
     width: 40%;
     height: auto;
+}
+
+#footer{
+    height: 10vh;
+    padding:1.6em 0;
+    font-size: 1.2em;
+    color: white;
+    background-color: #2f2f2f;
 }
