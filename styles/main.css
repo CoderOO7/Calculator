@@ -34,9 +34,7 @@ main header{
 
 #display-container{
     display: flex;
-    flex:1;
     flex-direction: column;
-    justify-content: stretch;
     margin-bottom: 0.6em;
     border-radius: 0.4rem; 
     background-color: white;
