@@ -37,6 +37,7 @@ main header{
     flex-direction: column;
     margin-bottom: 0.6em;
     border-radius: 0.4rem; 
+    overflow: hidden;
     background-color: white;
 }
 #medium{
@@ -49,7 +50,7 @@ main header{
     height: 40%;
 }
 #medium,#small{
-    padding: 0.1em;
+    padding: 0.2em;
     line-height: 0.9em;
     background-color: white;
     /* border: 2px solid chocolate;  */

@@ -56,13 +56,11 @@ const substract = (num1, num2) => num1 - num2;
 
 const multiply = (num1, num2) => num1 * num2;
 
-const divide = (num1, num2) => num1 / num2;
+const divide = (num1, num2) => num2 === 0 ? "GET OUT !!" : num1 / num2;
 
 const percentage = (num1, num2) => num2 !== '' ? (num1 / 100) * num2 : num1 / 100;
 
 const operate = ({ num1, num2, operator }) => {
-    console.log({ num1, num2, operator });
-
     let result = null;
     num1 = Number(num1);
     num2 = Number(num2);
@@ -78,10 +76,15 @@ const operate = ({ num1, num2, operator }) => {
     else if (operator === "%")
         result = percentage(num1, num2);
 
-    calculate.result = result.toString();
-    fillMediumDisplay(result);
-    console.log({ result });
+    calculate.result = filterResult(result);
+    fillMediumDisplay(calculate.result);
+    console.log({ calculate })
 }
+
+const filterResult = (result) => {
+    return Number.isNaN(result) ? result : result % 1 != 0 ? result.toFixed(2) : result.toString();
+}
+
 
 const clearInput = () => {
     console.log('clearInput');
@@ -100,31 +103,31 @@ const resetCalculator = () => {
 
 document.addEventListener('keydown', e => {
     console.log(e.key);
-    if(e.key === '.' || e.key >= 0 && e.key <= 9){
+    if (e.key === '.' || e.key >= 0 && e.key <= 9) {
         document.querySelector(`button[data-number='${e.key}']`).click();
     }
-    else if(e.key === "+"){
+    else if (e.key === "+") {
         document.querySelector(`button[data-operator='${e.key}']`).click();
     }
-    else if(e.key === "-"){
+    else if (e.key === "-") {
         document.querySelector(`button[data-operator='${e.key}']`).click();
     }
-    else if(e.key === "*"){
+    else if (e.key === "*") {
         document.querySelector(`button[data-operator='x']`).click();
     }
-    else if(e.key === "/"){
+    else if (e.key === "/") {
         document.querySelector(`button[data-operator='÷']`).click();
     }
-    else if(e.key === "%"){
+    else if (e.key === "%") {
         document.querySelector(`button[data-operator='${e.key}']`).click();
     }
-    else if(e.key === "Backspace"){
+    else if (e.key === "Backspace") {
         document.querySelector(`button[data-operator='backspace']`).click();
     }
-    else if(e.key === "Escape" || e.key === "Delete"){
+    else if (e.key === "Escape" || e.key === "Delete") {
         document.querySelector(`button[data-operator='reset']`).click();
     }
-    else if(e.key === "Enter"){
+    else if (e.key === "Enter") {
         document.querySelector(`button[data-operator='=']`).click();
     }
 })
