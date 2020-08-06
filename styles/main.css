@@ -36,8 +36,8 @@ main header{
     display: flex;
     flex-direction: column;
     margin-bottom: 0.6em;
-    border-radius: 0.4rem; 
-    overflow: hidden;
+    border-radius: 0.4rem;
+    overflow: hidden; 
     background-color: white;
 }
 #medium{
@@ -52,6 +52,9 @@ main header{
 #medium,#small{
     padding: 0.2em;
     line-height: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     background-color: white;
     /* border: 2px solid chocolate;  */
 }

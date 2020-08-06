@@ -82,7 +82,7 @@ const operate = ({ num1, num2, operator }) => {
 }
 
 const filterResult = (result) => {
-    return Number.isNaN(result) ? result : result % 1 != 0 ? result.toFixed(2) : result.toString();
+    return Number.isNaN(Number(result)) ? result : result % 1 != 0 ? result.toFixed(2) : result.toString();
 }
 
 
