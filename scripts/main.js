@@ -46,9 +46,23 @@ function activateButtons(e) {
     }
 }
 
-const fillSmallDisplay = (string) => smallDisplay.textContent += string;
+const fillSmallDisplay = (string) => {
+    if(getInputTextWidth(smallDisplay) < getContentWidth(smallDisplay))
+        smallDisplay.textContent += string
+    else{
+        let newStr = smallDisplay.textContent+string;
+        smallDisplay.textContent = newStr.slice(1, newStr.length - 1);
+    }
+}
 
-const fillMediumDisplay = (string) => mediumDisplay.textContent = string;
+const fillMediumDisplay = (string) => { 
+    if(getInputTextWidth(mediumDisplay) < getContentWidth(mediumDisplay))
+        mediumDisplay.textContent = string;
+    else{
+        let newStr = mediumDisplay.textContent+string;
+        mediumDisplay.textContent = mewStr.slice(1, newStr.length - 1);
+    }
+}
 
 const add = (num1, num2) => num1 + num2;
 
@@ -99,6 +113,21 @@ const resetCalculator = () => {
     isOperatorPressedOnce = false;
     smallDisplay.textContent = '';
     mediumDisplay.textContent = '';
+}
+
+const getContentWidth = (element) => {
+    let styles = window.getComputedStyle(element);
+  
+    return element.clientWidth
+      - parseFloat(styles.paddingLeft)
+      - parseFloat(styles.paddingRight)
+}
+
+const getInputTextWidth = (element) => {
+    let c = document.createElement("canvas");
+    let ctx = c.getContext("2d");
+    let txtWidth = ctx.measureText(element.textContent).width;
+    return txtWidth;
 }
 
 document.addEventListener('keydown', e => {
