@@ -8,8 +8,12 @@ const mediumDisplay = document.getElementById('medium');
 const smallDisplay = document.getElementById('small');
 
 buttonContainer.addEventListener('click', activateButtons);
+buttonContainer.addEventListener('transitionend', removeTransition);
 
 function activateButtons(e) {
+    if(e.target.parentElement.id.includes("button-container"))
+        e.target.classList.add("clicked");
+
     if (e.target.className.includes('misc__btn')) {
         if (e.target.dataset.operator.includes('result')) {
             return operate(calculate);
@@ -45,6 +49,11 @@ function activateButtons(e) {
         fillSmallDisplay(e.target.textContent);
     }
 }
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('clicked');
+  }
 
 const fillSmallDisplay = (string) => {
     if(getInputTextWidth(smallDisplay) < getContentWidth(smallDisplay))
