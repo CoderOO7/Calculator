@@ -53,7 +53,7 @@ function activateButtons(e) {
 function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
     e.target.classList.remove('clicked');
-  }
+}
 
 const fillSmallDisplay = (string) => {
     if(getInputTextWidth(smallDisplay) < getContentWidth(smallDisplay))

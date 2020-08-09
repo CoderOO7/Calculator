@@ -80,7 +80,17 @@ button.clicked{
     box-shadow:inset 0 0 10px rgb(0,0,0,0.8);    
     transform: translateY(0.2em);
 }
- 
+button.operator{
+    color: white;
+    background-color: #f5a31a;
+}
+button.misc__btn{
+    color: white;
+    background-color: #E94B3CFF;
+}
+button.misc__btn[data-operator="result"]{
+    background-color: #799351;
+}
 
 #bksp img{
     width: 40%;
