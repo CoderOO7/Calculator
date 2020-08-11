@@ -1,52 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- stylesheet -->
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <title>Document</title>
-</head>
-<body>
-    <main id="container">
-        <header>
-            <h2>Calculator</h2>
-        </header>
-        <div id="calc-container">
-            <div id="display-container">
-                <div class="display" id="medium"></div>
-                <div class="display" id="small"></div>
-            </div>
-            <div id="button-container">
-                <button class="misc__btn" data-operator="reset">AC</button>
-                <button class="misc__btn" data-operator="backspace" id="bksp">⌫</button>
-                <button class="operator" data-operator="%">%</button>
-                <button class="operator" data-operator="÷">÷</button>
-                <button class="number" data-number="7">7</button>
-                <button class="number" data-number="8">8</button>
-                <button class="number" data-number="9">9</button>
-                <button class="operator" data-operator="x">x</button>
-                <button class="number" data-number="4">4</button>
-                <button class="number" data-number="5">5</button>
-                <button class="number" data-number="6">6</button>
-                <button class="operator" data-operator="-">-</button>
-                <button class="number" data-number="1">1</button>
-                <button class="number" data-number="2">2</button>
-                <button class="number" data-number="3">3</button>
-                <button class="operator" data-operator="+">+</button>
-                <button class="number" data-number="0">0</button>
-                <button class="number">00</button>
-                <button class="number" data-number=".">.</button>
-                <button class="misc__btn" data-operator="result">=</button>
-            </div>
-        </div>
-    </main>
 
-    <footer id="footer">
-        <small id="footer_copyright">Copyright &copy;2020; Made by CoderOO7</small> 
-    </footer>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- stylesheet -->
+        <link rel="stylesheet" href="styles/reset.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <title>Document</title>
+    </head>
 
-    <script src="./scripts/main.js"></script>
-</body>
+    <body>
+        <main class="content">
+            <header class="header">
+                <h2>Calculator</h2>
+            </header>
+            <div class="calculator">
+                <div class="display">
+                    <output class="display__result">&nbsp;</output>
+                    <output class="display__input">&nbsp;</output>
+                </div>
+                <div class="container">
+                    <button class="calc-btn calc-btn--action" data-action="reset">AC</button>
+                    <button class="calc-btn calc-btn--action" data-action="undo">⌫</button>
+                    <button class="calc-btn calc-btn--operator" data-operator="%">%</button>
+                    <button class="calc-btn calc-btn--operator" data-operator="÷">÷</button>
+                    <button class="calc-btn calc-btn--number" data-number="7">7</button>
+                    <button class="calc-btn calc-btn--number" data-number="8">8</button>
+                    <button class="calc-btn calc-btn--number" data-number="9">9</button>
+                    <button class="calc-btn calc-btn--operator" data-operator="x">x</button>
+                    <button class="calc-btn calc-btn--number" data-number="4">4</button>
+                    <button class="calc-btn calc-btn--number" data-number="5">5</button>
+                    <button class="calc-btn calc-btn--number" data-number="6">6</button>
+                    <button class="calc-btn calc-btn--operator" data-operator="-">-</button>
+                    <button class="calc-btn calc-btn--number" data-number="1">1</button>
+                    <button class="calc-btn calc-btn--number" data-number="2">2</button>
+                    <button class="calc-btn calc-btn--number" data-number="3">3</button>
+                    <button class="calc-btn calc-btn--operator" data-operator="+">+</button>
+                    <button class="calc-btn calc-btn--number" data-number="0">0</button>
+                    <button class="calc-btn calc-btn--number">00</button>
+                    <button class="calc-btn calc-btn--number" data-number=".">.</button>
+                    <button class="calc-btn calc-btn--action" data-action="result">=</button>
+                </div>
+            </div>
+        </main>
+        <aside class="options">
+            <div class="github">
+                <a href="https://github.com/CoderOO7/Calculator" class="github__link" target="__blank">
+                    <i class="icon fa fa-github fa-3x" aria-hidden="true"></i>
+                </a>
+                <p class="github__description">View the code</p>
+            </div>
+            <details class="help">
+                <summary class="help__title"><i class="icon fa fa-question-circle fa-3x"></i></summary>
+                <div class="help__shortcuts">
+                    <ul class="shortcuts__list">
+                        <li class="shortcuts__item">
+                            <kbd class="shortcuts__kbd">Esc</kbd> / <kbd class="shortcuts__kbd">Delete</kbd> to reset
+                        </li>
+                        <li class="shortcuts__item">
+                            <kbd class="shortcuts__kbd">Backspace</kbd> to undo </li>
+                        <li class="shortcuts__item">
+                            <kbd class="shortcuts__kbd">=</kbd> to calculate result </li>
+                        <li class="shortcuts__item">
+                            <kbd class="shortcuts__kbd">0-9</kbd> to enter number</li>
+                        <li class="shortcuts__item">
+                            <kbd class="shortcuts__kbd">.</kbd> to enter decimal </li>
+                        <li class="shortcuts__item">
+                            <kbd class="shortcuts__kbd">+</kbd> , <kbd class="shortcuts__kbd">-</kbd> , <kbd
+                                class="shortcuts__kbd">*</kbd> , <kbd class="shortcuts__kbd">/</kbd> to enter operator
+                        </li>
+                    </ul>
+                </div>
+            </details>
+        </aside>
+        <footer class="footer">
+            <small class="footer__copyright">Copyright &copy;2020 Made by CoderOO7</small>
+        </footer>
+        <script src="./scripts/main.js"></script>
+    </body>
+
 </html>
