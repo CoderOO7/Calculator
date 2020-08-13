@@ -52,21 +52,26 @@ function removeTransition(e) {
   e.target.classList.remove("clicked");
 }
 
-const fillinputDisplay = string => {
-  if (getInputTextWidth(inputDisplay) < getContentWidth(inputDisplay))
-    inputDisplay.textContent += string;
-  else {
-    let newStr = inputDisplay.textContent + string;
-    inputDisplay.textContent = newStr.slice(1, newStr.length - 1);
+const fillinputDisplay = (inputChar) => {
+  if (inputDisplay.textContent.length < 16) {
+    inputDisplay.textContent += inputChar;
+  } else {
+    let newStr = inputDisplay.textContent + inputChar;
+    inputDisplay.textContent = newStr.slice(1, newStr.length);
   }
 };
 
-const fillresultDisplay = string => {
-  if (getInputTextWidth(resultDisplay) < getContentWidth(resultDisplay))
-    resultDisplay.textContent = string;
+const fillresultDisplay = (finalAnswer) => {
+  let maxDigit = 13;
+  let prevAnswer = Number(resultDisplay.textContent).toString();
+  let isPrevAnsExponential = prevAnswer.match(/\d+[.]?\d+[eE][+]\d+/);
+  if (
+    Number.isNaN(Number(finalAnswer)) ||
+    (!isPrevAnsExponential && prevAnswer.length <= maxDigit)
+  )
+    resultDisplay.textContent = finalAnswer;
   else {
-    let newStr = resultDisplay.textContent + string;
-    resultDisplay.textContent = mewStr.slice(1, newStr.length - 1);
+    resultDisplay.textContent = roundResult(finalAnswer, maxDigit);
   }
 };
 
@@ -97,7 +102,15 @@ const operate = ({ num1, num2, operator }) => {
   console.log({ calculate });
 };
 
-const filterResult = result => {
+const roundResult = (answer, maxDigit) => {
+  let decimalIdx = answer.indexOf(".");
+  /* return decimalIdx >= 0
+    ? Number.parseFloat(answer).toFixed(maxDigit - decimalIdx)
+    : Number.parseFloat(answer).toExponential(); */
+  return Number.parseFloat(answer).toExponential(2);
+};
+
+const filterResult = (result) => {
   return Number.isNaN(Number(result))
     ? result
     : result % 1 != 0
@@ -120,24 +133,24 @@ const resetCalculator = () => {
   resultDisplay.textContent = "";
 };
 
-const getContentWidth = element => {
+const getContentWidth = (element) => {
   let styles = window.getComputedStyle(element);
 
   return (
     element.clientWidth -
-    parseFloat(styles.paddingLeft) -
-    parseFloat(styles.paddingRight)
+    Number.parseFloat(styles.paddingLeft) -
+    Number.parseFloat(styles.paddingRight)
   );
 };
 
-const getInputTextWidth = element => {
+const getInputTextWidth = (element) => {
   let c = document.createElement("canvas");
   let ctx = c.getContext("2d");
   let txtWidth = ctx.measureText(element.textContent).width;
   return txtWidth;
 };
 
-document.addEventListener("keydown", e => {
+document.addEventListener("keydown", (e) => {
   console.log(e.key);
   if (e.key === "." || (e.key >= 0 && e.key <= 9)) {
     document.querySelector(`button[data-number='${e.key}']`).click();

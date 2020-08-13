@@ -47,7 +47,13 @@ body {
 }
 
 .display output {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2em;
     border-radius: 0.4em;
+    background-color: white;
+    border: 2px solid chocolate;
 }
 
 .display__result {
@@ -58,15 +64,6 @@ body {
 .display__input {
     font-size: 1.5em;
     height: 40%;
-}
-
-.display__result,
-.display__input {
-    padding: 0.2em;
-    line-height: 0.9em;
-    white-space: nowrap;
-    background-color: white;
-    border: 2px solid chocolate;
 }
 
 .container {
@@ -86,16 +83,30 @@ body {
     background-color: white;
 }
 
-.calc-btn:active,
-.calc-btn.clicked {
-    background-color: khaki;
-    font-size: 1.4em;
-    box-shadow: inset 0 0 10px rgb(0, 0, 0, 0.8);
-    transform: translateY(0.2em);
+.calc-btn {
+    box-shadow: 0.1em 0.1em 0.1rem rgb(158, 156, 149);
+    transition: background-color .2s, color .2s, transform .2s, box-shadow .2s;
 }
 
+.calc-btn:hover {
+    box-shadow: 0.2em 0.2em 0.2em rgb(255, 228, 155);
+    cursor: pointer;
+    transform: translateY(-0.1em);
+}
+
+.calc-btn:focus {
+    outline: 0.1em solid #fff;
+}
+
+.calc-btn:active {
+    background-color: #faf3dd;
+    box-shadow: 0.2em 0.2em 0.1em rgb(255, 228, 155);
+    transform: translateY(0.1em);
+}
+
+
 .calc-btn--number {
-    color: black;
+    color: #000;
 }
 
 .calc-btn--operator {
@@ -118,11 +129,40 @@ body {
 }
 
 .icon {
-    color: black;
+    margin-right: 0.4em;
+    color: #1f1f1f;
 }
 
 .github {
+    position: relative;
     margin-bottom: 2em;
+}
+
+.github__description {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    padding: 0.5em;
+    width: max-content;
+    transform: translateY(-50%);
+    color: #FFF;
+    background-color: #2f2f2f;
+    visibility: hidden;
+}
+
+.github__description::before {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    content: "";
+    transform: translateY(-50%);
+    border-top: 0.75em solid transparent;
+    border-right: 0.75em solid #2f2f2f;
+    border-bottom: 0.75em solid transparent;
+}
+
+.github__link:hover+.github__description {
+    visibility: visible;
 }
 
 .github__link:link,
