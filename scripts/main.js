@@ -1,5 +1,10 @@
 //Global Variables
-const calculate = { num1: "", num2: "", operator: "", result: "" };
+const calculate = {
+  num1: "",
+  num2: "",
+  operator: "",
+  result: "",
+};
 let isOperatorPressedOnce = false;
 
 //Selecting DOM Nodes
@@ -11,7 +16,7 @@ buttonContainer.addEventListener("click", activateButtons);
 buttonContainer.addEventListener("transitionend", removeTransition);
 
 function activateButtons(e) {
-  if (e.target.parentElement.id.includes("container"))
+  if (e.target.parentElement.className.includes("container"))
     e.target.classList.add("clicked");
 
   if (e.target.className.includes("calc-btn--action")) {
@@ -99,7 +104,9 @@ const operate = ({ num1, num2, operator }) => {
 
   calculate.result = filterResult(result);
   fillresultDisplay(calculate.result);
-  console.log({ calculate });
+  console.log({
+    calculate,
+  });
 };
 
 const roundResult = (answer, maxDigit) => {

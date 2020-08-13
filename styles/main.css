@@ -98,7 +98,8 @@ body {
     outline: 0.1em solid #fff;
 }
 
-.calc-btn:active {
+.calc-btn:active,
+.clicked {
     background-color: #faf3dd;
     box-shadow: 0.2em 0.2em 0.1em rgb(255, 228, 155);
     transform: translateY(0.1em);
