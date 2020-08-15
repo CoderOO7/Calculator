@@ -1,11 +1,13 @@
 //Global Variables
+"use-strict";
 const calculate = {
   num1: "",
   num2: "",
   operator: "",
   result: "",
 };
-let isOperatorPressedOnce = false;
+let inputCharStack = [];
+let resultStack = [];
 
 //Selecting DOM Nodes
 const buttonContainer = document.querySelector(".container");
@@ -20,37 +22,85 @@ function activateButtons(e) {
     e.target.classList.add("clicked");
 
   if (e.target.className.includes("calc-btn--action")) {
-    if (e.target.dataset.action.includes("result")) {
-      return operate(calculate);
-    }
-    if (e.target.dataset.action.includes("reset")) {
-      return resetCalculator();
-    }
-    if (e.target.dataset.action.includes("undo")) {
-      return clearInput();
-    }
+    handleActionClick(e);
   }
 
-  if (e.target.className.includes("operator")) {
-    if (!isOperatorPressedOnce) isOperatorPressedOnce = true;
-    else {
-      calculate.num1 = calculate.result;
-      calculate.num2 = "";
-    }
-
-    calculate.operator = e.target.dataset.operator;
-    fillinputDisplay(e.target.textContent);
+  if (e.target.className.includes("calc-btn--operator")) {
+    handleOperatorClick(e);
   }
 
-  if (e.target.className.includes("number")) {
-    if (isOperatorPressedOnce && calculate.num1 !== "") {
-      calculate.num2 += e.target.textContent;
-      operate(calculate);
-    } else calculate.num1 += e.target.textContent;
+  if (e.target.className.includes("calc-btn--number")) {
+    handleNumberClick(e);
+  }
 
-    fillinputDisplay(e.target.textContent);
+  if (e.target.className.includes("calc-btn--decimal")) {
+    handleDecimalClick(e);
   }
 }
+
+const handleActionClick = (e) => {
+  if (e.target.dataset.action.includes("result")) {
+    if (!isEmpty(calculate.num1) && !calculate.num2) {
+      return operate(calculate);
+    }
+  }
+  if (e.target.dataset.action.includes("reset")) {
+    return resetCalculator();
+  }
+  if (e.target.dataset.action.includes("undo")) {
+    return clearInput();
+  }
+};
+
+const handleOperatorClick = (e) => {
+  if (isEmpty(calculate.num1)) return;
+  if (!isEmpty(calculate.result)) {
+    calculate.num1 = calculate.result;
+    calculate.num2 = "";
+  }
+  calculate.operator = e.target.dataset.operator;
+  inputCharStack.push(e.target.dataset.operator);
+  fillinputDisplay(e.target.dataset.operator);
+};
+
+const handleNumberClick = (e) => {
+  if (isEmpty(calculate.operator)) {
+    calculate.num1 += e.target.dataset.number;
+  } else {
+    calculate.num2 += e.target.dataset.number;
+    operate(calculate);
+  }
+  inputCharStack.push(e.target.dataset.number);
+  fillinputDisplay(e.target.dataset.number);
+};
+
+const handleDecimalClick = (e) => {
+  if (isEmpty(calculate.num1)) return;
+  if (isEmpty(calculate.operator)) {
+    if (!calculate.num1.includes(".")) {
+      calculate.num1 += ".";
+      fillinputDisplay(e.target.dataset.decimal);
+    }
+  } else {
+    if (!calculate.num2.includes(".")) {
+      calculate.num2 += ".";
+      fillinputDisplay(e.target.dataset.decimal);
+    }
+  }
+};
+
+const replaceOperator = (inputString, newOperator) => {
+  let currOperatorIdx = inputString.length - 1;
+  return inputString.slice(0, currOperatorIdx) + newOperator;
+};
+
+const isDecimal = (inputChar) => inputChar === ".";
+
+const isOperator = (inputChar) => {
+  return ["+", "-", "x", "%", "÷"].some((item) => item === inputChar);
+};
+
+const isEmpty = (str) => !str || str.length === 0;
 
 function removeTransition(e) {
   if (e.propertyName !== "transform") return;
@@ -58,11 +108,20 @@ function removeTransition(e) {
 }
 
 const fillinputDisplay = (inputChar) => {
-  if (inputDisplay.textContent.length < 16) {
+  let inputString = inputDisplay.textContent;
+  let lastChar = inputString[inputString.length - 1];
+
+  if (isOperator(inputChar) && isOperator(lastChar)) {
+    let length = inputDisplay.textContent.length;
+    inputString = inputString.slice(0, length - 1);
+    inputDisplay.textContent = inputString;
+    inputCharStack.splice(inputCharStack.length - 2, 1);
+  }
+
+  if (inputString.length < 16) {
     inputDisplay.textContent += inputChar;
   } else {
-    let newStr = inputDisplay.textContent + inputChar;
-    inputDisplay.textContent = newStr.slice(1, newStr.length);
+    inputDisplay.textContent = inputString.slice(1) + inputChar;
   }
 };
 
@@ -104,8 +163,9 @@ const operate = ({ num1, num2, operator }) => {
 
   calculate.result = filterResult(result);
   fillresultDisplay(calculate.result);
+  resultStack.push({ ...calculate });
   console.log({
-    calculate,
+    resultStack,
   });
 };
 
@@ -126,41 +186,56 @@ const filterResult = (result) => {
 };
 
 const clearInput = () => {
-  console.log("clearInput");
-  const string = inputDisplay.textContent;
-  inputDisplay.textContent = string.slice(0, string.length - 1);
+  let inputCharStackString = inputCharStack.join("");
+
+  if (inputCharStackString.length) {
+    let inputString = "";
+    let lastInputChar = "";
+    let endIdx = inputCharStackString.length;
+    let startIdx = endIdx - inputDisplay.textContent.trim().length;
+
+    inputString = inputCharStackString.slice(startIdx, endIdx);
+    lastInputChar = inputString[inputString.length - 1];
+
+    if (!Number.isNaN(Number(lastInputChar))) {
+      resultStack.pop();
+      if (isEmpty(resultStack)) {
+        resetCalculator();
+      } else {
+        resultDisplay.textContent = resultStack[resultStack.length - 1].result;
+      }
+    }
+    inputCharStack.pop();
+    if (startIdx - 1 >= 0) {
+      inputDisplay.textContent = inputCharStackString.slice(
+        startIdx - 1,
+        inputCharStackString.length - 1
+      );
+    } else {
+      inputDisplay.textContent = inputCharStackString.slice(
+        startIdx,
+        inputCharStackString.length - 1
+      );
+    }
+  }
 };
 
 const resetCalculator = () => {
   for (const key in calculate) {
     calculate[key] = "";
   }
-  isOperatorPressedOnce = false;
   inputDisplay.textContent = "";
   resultDisplay.textContent = "";
-};
-
-const getContentWidth = (element) => {
-  let styles = window.getComputedStyle(element);
-
-  return (
-    element.clientWidth -
-    Number.parseFloat(styles.paddingLeft) -
-    Number.parseFloat(styles.paddingRight)
-  );
-};
-
-const getInputTextWidth = (element) => {
-  let c = document.createElement("canvas");
-  let ctx = c.getContext("2d");
-  let txtWidth = ctx.measureText(element.textContent).width;
-  return txtWidth;
+  resultStack = [];
+  //inputCharStack = [];
 };
 
 document.addEventListener("keydown", (e) => {
   console.log(e.key);
-  if (e.key === "." || (e.key >= 0 && e.key <= 9)) {
+  if (e.key >= 0 && e.key <= 9) {
     document.querySelector(`button[data-number='${e.key}']`).click();
+  } else if (e.key === ".") {
+    document.querySelector(`button[data-decimal='${e.key}']`).click();
   } else if (e.key === "+") {
     document.querySelector(`button[data-operator='${e.key}']`).click();
   } else if (e.key === "-") {
