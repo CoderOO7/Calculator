@@ -1,6 +1,6 @@
 //Global Variables
 "use-strict";
-const calculate = {
+let calculate = {
   num1: "",
   num2: "",
   operator: "",
@@ -200,8 +200,11 @@ const clearInput = () => {
     if (!Number.isNaN(Number(lastInputChar))) {
       resultStack.pop();
       if (isEmpty(resultStack)) {
-        resetCalculator();
+        resultDisplay.textContent = "";
       } else {
+        calculate = { ...resultStack[resultStack.length - 1] };
+        calculate.num1 = calculate.result;
+        calculate.num2 = "";
         resultDisplay.textContent = resultStack[resultStack.length - 1].result;
       }
     }
@@ -217,6 +220,8 @@ const clearInput = () => {
         inputCharStackString.length - 1
       );
     }
+  } else {
+    resetCalculator();
   }
 };
 
@@ -227,7 +232,7 @@ const resetCalculator = () => {
   inputDisplay.textContent = "";
   resultDisplay.textContent = "";
   resultStack = [];
-  //inputCharStack = [];
+  inputCharStack = [];
 };
 
 document.addEventListener("keydown", (e) => {

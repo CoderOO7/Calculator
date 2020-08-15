@@ -106,7 +106,8 @@ body {
 }
 
 
-.calc-btn--number {
+.calc-btn--number,
+.calc-btn--decimal {
     color: #000;
 }
 
