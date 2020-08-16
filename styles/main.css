@@ -1,219 +1,220 @@
 *,
 *:before,
 *:after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    text-align: center;
-    font: 300 13px/150% Arial, Helvetica, sans-serif;
+  text-align: center;
+  font: 300 13px/150% Arial, Helvetica, sans-serif;
+  background-color: #ffecd2;
 }
 
 .content {
-    height: 90vh;
-    font-size: 1rem;
-    margin: 0 auto;
+  height: 90vh;
+  font-size: 1rem;
+  margin: 0 auto;
 }
 
 .header {
-    height: 18vh;
-    padding: 0.8em;
-    font-size: 3em;
-    font-weight: 800;
+  height: 18vh;
+  padding: 0.8em;
+  font-size: 3em;
+  font-weight: 800;
+  font-family: monospace;
 }
 
 .calculator {
-    display: grid;
-    width: 50vh;
-    height: 60vh;
-    padding: 0.6em;
-    margin: 0 auto;
-    border: 0.2em solid black;
-    border-radius: 3%;
-    background-color: #2f2f2f;
-    box-shadow: 5px 4px 17px 0px rgba(50, 50, 50, 0.64);
+  display: grid;
+  width: 50vh;
+  height: 60vh;
+  padding: 0.6em;
+  margin: 0 auto;
+  border: 0.2em solid black;
+  border-radius: 3%;
+  background-color: #2f2f2f;
+  box-shadow: 5px 4px 17px 0px rgba(50, 50, 50, 0.64);
 }
 
 .display {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* padding: 0.6em; */
-    resize: none;
-    margin-bottom: 0.6em;
-    border-radius: 0.4rem;
-    overflow: hidden;
-    /* background-color: white; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* padding: 0.6em; */
+  resize: none;
+  margin-bottom: 0.6em;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  /* background-color: white; */
 }
 
 .display output {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.2em;
-    border-radius: 0.4em;
-    background-color: white;
-    border: 2px solid chocolate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2em;
+  border-radius: 0.4em;
+  background-color: white;
+  border: 2px solid chocolate;
 }
 
 .display__result {
-    font-size: 2em;
-    height: 40%;
+  font-size: 2em;
+  height: 40%;
 }
 
 .display__input {
-    font-size: 1.5em;
-    height: 40%;
+  font-size: 1.5em;
+  height: 40%;
 }
 
 .container {
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 6px;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 6px;
 }
 
 .calc-btn {
-    outline: none;
-    font-size: 1.2em;
-    font-weight: 800;
-    border-radius: 0.4rem;
-    transition: all .09s ease;
-    color: white;
-    background-color: white;
+  outline: none;
+  font-size: 1.2em;
+  font-weight: 800;
+  border-radius: 0.4rem;
+  transition: all 0.09s ease;
+  color: white;
+  background-color: white;
 }
 
 .calc-btn {
-    box-shadow: 0.1em 0.1em 0.1rem rgb(158, 156, 149);
-    transition: background-color .2s, color .2s, transform .2s, box-shadow .2s;
+  box-shadow: 0.1em 0.1em 0.1rem rgb(158, 156, 149);
+  transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .calc-btn:hover {
-    box-shadow: 0.2em 0.2em 0.2em rgb(255, 228, 155);
-    cursor: pointer;
-    transform: translateY(-0.1em);
+  box-shadow: 0.2em 0.2em 0.2em rgb(255, 228, 155);
+  cursor: pointer;
+  transform: translateY(-0.1em);
 }
 
 .calc-btn:focus {
-    outline: 0.1em solid #fff;
+  outline: 0.1em solid #fff;
 }
 
 .calc-btn:active,
 .clicked {
-    background-color: #faf3dd;
-    box-shadow: 0.2em 0.2em 0.1em rgb(255, 228, 155);
-    transform: translateY(0.1em);
+  background-color: #faf3dd;
+  box-shadow: 0.2em 0.2em 0.1em rgb(255, 228, 155);
+  transform: translateY(0.1em);
 }
-
 
 .calc-btn--number,
 .calc-btn--decimal {
-    color: #000;
+  color: #000;
 }
 
 .calc-btn--operator {
-    background-color: #f5a31a;
+  background-color: #f5a31a;
 }
 
 .calc-btn--action {
-    background-color: #E94B3CFF;
+  background-color: #e94b3cff;
 }
 
 .calc-btn--action[data-action="result"] {
-    background-color: #799351;
+  background-color: #799351;
 }
 
 .options {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 1em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1em;
 }
 
 .icon {
-    margin-right: 0.4em;
-    color: #1f1f1f;
+  margin-right: 0.4em;
+  color: #1f1f1f;
 }
 
 .github {
-    position: relative;
-    margin-bottom: 2em;
+  position: relative;
+  margin-bottom: 2em;
 }
 
 .github__description {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    padding: 0.5em;
-    width: max-content;
-    transform: translateY(-50%);
-    color: #FFF;
-    background-color: #2f2f2f;
-    visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  padding: 0.5em;
+  width: max-content;
+  transform: translateY(-50%);
+  color: #fff;
+  background-color: #2f2f2f;
+  visibility: hidden;
 }
 
 .github__description::before {
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    content: "";
-    transform: translateY(-50%);
-    border-top: 0.75em solid transparent;
-    border-right: 0.75em solid #2f2f2f;
-    border-bottom: 0.75em solid transparent;
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  content: "";
+  transform: translateY(-50%);
+  border-top: 0.75em solid transparent;
+  border-right: 0.75em solid #2f2f2f;
+  border-bottom: 0.75em solid transparent;
 }
 
-.github__link:hover+.github__description {
-    visibility: visible;
+.github__link:hover + .github__description {
+  visibility: visible;
 }
 
 .github__link:link,
 .github__link:visited {
-    color: #FFF;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 .help {
-    position: relative;
+  position: relative;
 }
 
 .help:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .help__title::-webkit-details-marker {
-    display: none;
+  display: none;
 }
 
 .help__shortcuts {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    padding: 1em;
-    width: max-content;
-    color: white;
-    background-color: #2f2f2f;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  padding: 1em;
+  width: max-content;
+  color: white;
+  background-color: #2f2f2f;
 }
 
 .shortcuts__list {
-    list-style: none;
-    text-align: initial;
+  list-style: none;
+  text-align: initial;
 }
 
-.shortcuts__item+.shortcuts__item {
-    margin-top: 0.8em;
+.shortcuts__item + .shortcuts__item {
+  margin-top: 0.8em;
 }
 
 .shortcuts__kbd {
-    padding: 0.25em;
-    color: initial;
-    background-color: #CFD7DE;
+  padding: 0.25em;
+  color: initial;
+  background-color: #cfd7de;
 }
 
 .footer {
-    height: 10vh;
-    padding: 1.6em 0;
-    font-size: 1.2em;
-    color: white;
-    background-color: #2f2f2f;
+  height: 10vh;
+  padding: 1.6em 0;
+  font-size: 1.2em;
+  color: white;
+  background-color: #2f2f2f;
 }
