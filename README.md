@@ -20,7 +20,7 @@ See the keyboard shortcuts by clicking on the question mark in the page's top le
 
 This project is part of TheOdinProject curriculum.
 
-# TLDR
+## TLDR
 
 - Give it a try <br>
   https://coderoo7.github.io/Calculator/
