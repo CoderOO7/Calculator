@@ -57,7 +57,7 @@ const percentage = (num1, num2) =>
   num2 !== "" ? (num1 / 100) * num2 : num1 / 100;
 
 /**
- * Return the calculated value after performing mathematical operation.
+ * Performing mathematical operation.
  *  @param {String} num1 - firstOperand in operation
  *  @param {String} num2 - SecondOperand in operation
  *  @param {String} operator - Operation to perform '+','-','x' etc.
@@ -88,8 +88,8 @@ const resetCalculator = () => {
   for (const key in calculate) {
     calculate[key] = "";
   }
-  inputDisplay.textContent = "";
-  resultDisplay.textContent = "";
+  inputDisplay.textContent = "\u00A0";
+  resultDisplay.textContent = "\u00A0";
   resultStack = [];
   inputCharStack = [];
 };

@@ -10,6 +10,12 @@ An online calculator with basic arithmetic features controlled by either the mou
 
 See the keyboard shortcuts by clicking on the question mark in the page's top left corner.
 
+## Contributing
+
+1. Clone/fork repository and create a new branch: `$ git checkout https://github.com/CoderOO7/Calculator.git -b your-branch-name`
+2. Make your changes
+3. Submit a pull request and explain your changes.
+
 ## Acknowledgment
 
 This project is part of TheOdinProject curriculum.
