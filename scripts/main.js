@@ -100,41 +100,43 @@ const resetCalculator = () => {
  */
 const undoOperation = () => {
   let inputCharStackString = inputCharStack.join("");
+  let inputString = "";
+  let lastInputChar = "";
+  let endIdx = "";
+  let startIdx = "";
+  let secondLastEntry = "";
 
-  if (inputCharStackString.length) {
-    let inputString = "";
-    let lastInputChar = "";
-    let endIdx = inputCharStackString.length;
-    let startIdx = endIdx - inputDisplay.textContent.trim().length;
+  if (!inputCharStackString.length && calculate.num2 === 0) {
+    return;
+  }
 
+  {
+    endIdx = inputCharStackString.length;
+    startIdx = endIdx - inputDisplay.textContent.trim().length;
     inputString = inputCharStackString.slice(startIdx, endIdx);
-    lastInputChar = inputString[inputString.length - 1];
+    secondLastEntry = { ...resultStack[resultStack.length - 2] };
+    lastInputChar = inputCharStack.pop();
+  }
 
-    if (!Number.isNaN(Number(lastInputChar))) {
-      resultStack.pop();
-      if (isEmpty(resultStack)) {
-        resultDisplay.textContent = "";
-      } else {
-        calculate = resultStack[resultStack.length - 1];
+  if (!Number.isNaN(Number(lastInputChar))) {
+    if (isEmpty(Object.entries(secondLastEntry))) {
+      resetCalculator();
+      return;
+    } else {
+      calculate = { ...secondLastEntry };
+      if (isOperator(inputCharStack[inputCharStack.length - 1])) {
         calculate.num1 = calculate.result;
         calculate.num2 = "";
-        resultDisplay.textContent = resultStack[resultStack.length - 1].result;
       }
+      resultDisplay.textContent = secondLastEntry.result;
+      resultStack.pop();
     }
-    inputCharStack.pop();
-    if (startIdx - 1 >= 0) {
-      inputDisplay.textContent = inputCharStackString.slice(
-        startIdx - 1,
-        inputCharStackString.length - 1
-      );
-    } else {
-      inputDisplay.textContent = inputCharStackString.slice(
-        startIdx,
-        inputCharStackString.length - 1
-      );
-    }
+  }
+
+  if (startIdx - 1 >= 0) {
+    inputDisplay.textContent = inputCharStackString.slice(startIdx - 1, -1);
   } else {
-    resetCalculator();
+    inputDisplay.textContent = inputCharStackString.slice(startIdx, -1);
   }
 };
 
@@ -217,7 +219,7 @@ const handleOperatorClick = (e) => {
  * @param {Object} e - The MouseClickEvent Object
  */
 const handleNumberClick = (e) => {
-  if (isEmpty(calculate.operator)) {
+  if (isEmpty(calculate.operator) && isEmpty(calculate.result)) {
     calculate.num1 += e.target.dataset.number;
   } else {
     calculate.num2 += e.target.dataset.number;
